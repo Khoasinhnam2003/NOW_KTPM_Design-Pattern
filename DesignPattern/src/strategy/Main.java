@@ -1,4 +1,4 @@
-package state;
+package strategy;
 
 import java.util.Scanner;
 
@@ -9,12 +9,12 @@ public class Main {
         // Nhập tên nhân viên
         System.out.print("Nhập tên nhân viên: ");
         String name = scanner.nextLine();
-        
+
         Employee employee = new Employee(name);
 
         while (true) {
             // Nhập chức vụ từ người dùng
-            System.out.print("Nhập chức vụ nhân viên-: ");
+            System.out.print("Nhập chức vụ nhân viên: ");
             String position = scanner.nextLine().trim();
 
             if (position.equalsIgnoreCase("exit")) {
@@ -22,22 +22,22 @@ public class Main {
                 break;
             }
 
-            // Thiết lập trạng thái tương ứng với chức vụ nhập vào
+            // Thiết lập chiến lược tương ứng với chức vụ nhập vào
             switch (position) {
                 case "Đội Trưởng":
-                    employee.setState(new CaptainState());
+                    employee.setWorkStrategy(new CaptainStrategy());
                     break;
                 case "Giám đốc":
-                    employee.setState(new DirectorState());
+                    employee.setWorkStrategy(new DirectorStrategy());
                     break;
                 case "Nhân viên VP":
-                    employee.setState(new OfficeEmployeeState());
+                    employee.setWorkStrategy(new OfficeWorkerStrategy());
                     break;
                 case "Nhân Viên Xưởng":
-                    employee.setState(new FactoryWorkerState());
+                    employee.setWorkStrategy(new FactoryWorkerStrategy());
                     break;
                 case "Kế Toán Trưởng":
-                    employee.setState(new ChiefAccountantState());
+                    employee.setWorkStrategy(new ChiefAccountantStrategy());
                     break;
                 default:
                     System.out.println("Chức vụ không hợp lệ.");
