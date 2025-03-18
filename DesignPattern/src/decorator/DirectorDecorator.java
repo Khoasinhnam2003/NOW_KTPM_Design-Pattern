@@ -1,4 +1,4 @@
-package decoratorPattern;
+package decorator;
 
 // Decorator: Giám đốc
 public class DirectorDecorator extends EmployeeDecorator {
