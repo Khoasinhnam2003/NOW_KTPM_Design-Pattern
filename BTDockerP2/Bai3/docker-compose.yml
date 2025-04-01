@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Mật khẩu của user root
+      MYSQL_USER: user                  # Tên người dùng MySQL
+      MYSQL_PASSWORD: password          # Mật khẩu người dùng
+      MYSQL_DATABASE: mydb              # Cơ sở dữ liệu mặc định
+    ports:
+      - "3309:3306"                      # Mở cổng 3306 cho MySQL
+    container_name: mysql-container
+    networks:
+      - mysql-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql                   # Kết nối tới MySQL
+      PMA_USER: user                    # Người dùng MySQL
+      PMA_PASSWORD: password            # Mật khẩu người dùng MySQL
+    ports:
+      - "8081:80"                       # PHPMyAdmin chạy trên cổng 8081
+    container_name: phpmyadmin-container
+    depends_on:
+      - mysql
+    networks:
+      - mysql-network
+
+networks:
+  mysql-network:
+    driver: bridge
